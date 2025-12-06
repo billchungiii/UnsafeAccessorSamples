@@ -10,9 +10,9 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7171/25H2/2025Update/HudsonValle
 
 | Method                    | Mean       | Error     | StdDev    | Median     | Gen0   | Allocated |
 |-------------------------- |-----------:|----------:|----------:|-----------:|-------:|----------:|
-| 'Field — direct access'   |  0.0052 ns | 0.0094 ns | 0.0088 ns |  0.0000 ns |      - |         - |
-| 'Field — unsafeaccessor'  |  0.3875 ns | 0.0453 ns | 0.1321 ns |  0.4065 ns |      - |         - |
-| 'Field — reflection'      | 32.9050 ns | 0.6896 ns | 0.6451 ns | 33.1890 ns | 0.0076 |      48 B |
-| 'Method — direct access'  |  0.1125 ns | 0.0401 ns | 0.0670 ns |  0.1006 ns |      - |         - |
-| 'Method — unsafeaccessor' |  0.0000 ns | 0.0000 ns | 0.0000 ns |  0.0000 ns |      - |         - |
-| 'Method — reflection'     | 19.7147 ns | 0.1160 ns | 0.1085 ns | 19.7282 ns | 0.0089 |      56 B |
+| 'Field — direct access'   |  0.0003 ns | 0.0008 ns | 0.0007 ns |  0.0000 ns |      - |         - |
+| 'Field — unsafeaccessor'  |  0.0072 ns | 0.0098 ns | 0.0091 ns |  0.0032 ns |      - |         - |
+| 'Field — reflection'      | 18.8809 ns | 0.2322 ns | 0.2058 ns | 18.8309 ns | 0.0076 |      48 B |
+| 'Method — direct access'  |  0.0021 ns | 0.0043 ns | 0.0041 ns |  0.0000 ns |      - |         - |
+| 'Method — unsafeaccessor' |  0.0016 ns | 0.0031 ns | 0.0029 ns |  0.0000 ns |      - |         - |
+| 'Method — reflection'     | 20.2450 ns | 0.3757 ns | 0.3137 ns | 20.3120 ns | 0.0089 |      56 B |
