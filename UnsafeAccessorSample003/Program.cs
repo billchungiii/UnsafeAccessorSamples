@@ -2,6 +2,9 @@
 
 namespace UnsafeAccessorSample003
 {
+    /// <summary>
+    /// Access class's private static members via UnsafeAccessor
+    /// </summary>
     internal class Program
     {
         static void Main(string[] args)
