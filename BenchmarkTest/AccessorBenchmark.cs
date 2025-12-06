@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BenchmarkTest
@@ -15,12 +16,14 @@ namespace BenchmarkTest
             _person = new Person("BenchmarkUser", 40);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Field — direct access")]
         public void AccessPrivateField_Direct()
         {            
             _person._age += 1;
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Field — unsafeaccessor")]
         public void AccessPrivateField_Unsafe()
         {
@@ -28,6 +31,7 @@ namespace BenchmarkTest
             age += 1;
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Field — reflection")]
         public void AccessPrivateField_Reflection()
         {
@@ -37,18 +41,21 @@ namespace BenchmarkTest
             fieldInfo.SetValue(_person, age);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Method — direct access")]
         public void AccessPrivateMethod_Direct()
         {
             _person.AddAge(2);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Method — unsafeaccessor")]
         public void AccessPrivateMethod_Unsafe()
         {
             PersonAccessor.CallAddAge(_person, 2);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Benchmark(Description = "Method — reflection")]
         public void AccessPrivateMethod_Reflection()
         {
