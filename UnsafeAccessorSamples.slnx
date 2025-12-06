@@ -4,4 +4,5 @@
   <Project Path="UnsafeAccessorSample002/UnsafeAccessorSample002.csproj" Id="acebeae0-67f0-422a-87e4-9e325c7b7f81" />
   <Project Path="UnsafeAccessorSample003/UnsafeAccessorSample003.csproj" Id="00e593b4-d20b-4eeb-aeb3-7690ae7a4aa6" />
   <Project Path="UnsafeAccessorSample004/UnsafeAccessorSample004.csproj" Id="7c153121-fee3-4e37-89f4-300a3e419206" />
+  <Project Path="UnsafeAccessorSample005/UnsafeAccessorSample005.csproj" Id="6e567ff2-7945-48c7-ac0f-56522a09fad1" />
 </Solution>
