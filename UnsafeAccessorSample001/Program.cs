@@ -3,7 +3,7 @@
 namespace UnsafeAccessorSample001
 {
     /// <summary>
-    /// Access instance's private constructor, method and field via UnsafeAccessor
+    /// Access instance's private constructors, methods and fields via UnsafeAccessor
     /// </summary>
     internal class Program
     {

@@ -1,7 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 
+
 namespace UnsafeAccessorSample002
 {
+    /// <summary>
+    /// Access instance's private properties via UnsafeAccessor
+    /// </summary>
     internal class Program
     {
         static void Main(string[] args)
