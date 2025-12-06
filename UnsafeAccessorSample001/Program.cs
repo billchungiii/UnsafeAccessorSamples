@@ -25,18 +25,40 @@ namespace UnsafeAccessorSample001
 
         }
     }
-
     public class Person
     {
+        /// <summary>
+        /// field
+        /// </summary>
         private string _name;
+
+        /// <summary>
+        /// filed
+        /// </summary>
         private int _age;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
         private Person(string name, int age) => (_name, _age) = (name, age);
 
+        /// <summary>
+        /// method 
+        /// </summary>
         private void Display() => Console.WriteLine($"{_name} -- {_age}");
 
+        /// <summary>
+        /// method (with return value)
+        /// </summary>
+        /// <returns></returns>
         private string Describe() => $"My name is {_name} ,and I am {_age} years old";
 
+        /// <summary>
+        /// method (with parameters)
+        /// </summary>
+        /// <param name="year"></param>
         private void AddAge(int year) => _age += year;
     }
 
