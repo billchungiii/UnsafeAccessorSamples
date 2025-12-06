@@ -62,7 +62,7 @@ namespace UnsafeAccessorSample001
         private void AddAge(int year) => _age += year;
     }
 
-    public class PersonAccessor
+    public static class PersonAccessor
     {
         /// <summary>
         /// Access private instance constructor
