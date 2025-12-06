@@ -16,7 +16,7 @@ namespace UnsafeAccessorSample004
             var list = GenericAccessor.Create();
             Console.WriteLine($"list count {list.Count}");
 
-            // this will throw exception -- System.MissingMethodException: Method not found: System.Collections.Generic.List`1.Add.            
+            // this will throw exception (.NET 8) -- System.MissingMethodException: Method not found: System.Collections.Generic.List`1.Add.            
             GenericAccessor.Add(list, 999);
             Console.WriteLine($"list count {list.Count}, index 0 is {list[0]}");
         }
