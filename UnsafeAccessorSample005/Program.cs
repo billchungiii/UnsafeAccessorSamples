@@ -9,14 +9,11 @@ namespace UnsafeAccessorSample005
     {
         static void Main(string[] args)
         {
-
             var list = GenericAccessor<int>.Create();
             Console.WriteLine($"list count {list.Count}");
-
                        
             GenericAccessor<int>.Add(list, 999);
             Console.WriteLine($"list count {list.Count}, index 0 is {list[0]}");
-
         }
     }
 
