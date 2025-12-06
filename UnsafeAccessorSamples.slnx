@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="UnsafeAccessorSample001/UnsafeAccessorSample001.csproj" />
   <Project Path="UnsafeAccessorSample002/UnsafeAccessorSample002.csproj" Id="acebeae0-67f0-422a-87e4-9e325c7b7f81" />
+  <Project Path="UnsafeAccessorSample003/UnsafeAccessorSample003.csproj" Id="00e593b4-d20b-4eeb-aeb3-7690ae7a4aa6" />
 </Solution>
