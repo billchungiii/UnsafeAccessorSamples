@@ -2,6 +2,9 @@
 
 namespace UnsafeAccessorSample001
 {
+    /// <summary>
+    /// Access instance's private constructor, method and field via UnsafeAccessor
+    /// </summary>
     internal class Program
     {
         static void Main(string[] args)
