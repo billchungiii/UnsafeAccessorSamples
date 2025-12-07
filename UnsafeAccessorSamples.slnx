@@ -5,4 +5,6 @@
   <Project Path="UnsafeAccessorSample003/UnsafeAccessorSample003.csproj" Id="00e593b4-d20b-4eeb-aeb3-7690ae7a4aa6" />
   <Project Path="UnsafeAccessorSample004/UnsafeAccessorSample004.csproj" Id="7c153121-fee3-4e37-89f4-300a3e419206" />
   <Project Path="UnsafeAccessorSample005/UnsafeAccessorSample005.csproj" Id="6e567ff2-7945-48c7-ac0f-56522a09fad1" />
+  <Project Path="UnsafeAccessorSample006/UnsafeAccessorSample006.csproj" Id="f354d687-8a6c-402f-ba6d-0bffa247a7ab" />
+  <Project Path="UnsafeAccessorSample007/UnsafeAccessorSample007.csproj" Id="3b97af71-910c-4bfb-bbc6-24dfb943ab28" />
 </Solution>
