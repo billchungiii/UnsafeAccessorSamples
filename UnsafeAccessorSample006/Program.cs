@@ -32,11 +32,11 @@ namespace UnsafeAccessorSample006
     public static class OuterClassAccessor
     {
         /// <summary>
-        /// Accessing private constructor of nested class InnerClass
+        /// Accessing private constructor of nested class InnerClass (UnsafeAccessorType with assembly qualified name)
         /// </summary>
         /// <returns></returns>
         [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-        [return: UnsafeAccessorType("UnsafeAccessorSample006.OuterClass+InnerClass")]
+        [return: UnsafeAccessorType("UnsafeAccessorSample006.OuterClass+InnerClass,UnsafeAccessorSample006")]
         public extern static object Create();
 
        
