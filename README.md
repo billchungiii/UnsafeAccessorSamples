@@ -11,6 +11,7 @@
 - [效能比較](#效能比較)
 - [版本差異](#版本差異)
 - [重要注意事項](#重要注意事項)
+- [使用範例](#使用範例)
 - [參考資源](#參考資源)
 - [授權條款](#授權條款)
 
@@ -121,50 +122,98 @@
 ### 基本語法
 
 ```csharp
-// UnsafeAccessorSamples/SomeClass.cs
-using System;
 using System.Runtime.CompilerServices;
 
-public class SomeClass
+// 定義包含私有成員的類別
+public class Person
 {
-    private int secretNumber = 42;
-    private static string secretMessage = "Hello, UnsafeAccessor!";
+    private string _name;
+    private int _age;
 
-    private void RevealSecret()
-    {
-        Console.WriteLine($"Secret Number: {secretNumber}, Message: {secretMessage}");
-    }
+    private Person(string name, int age) => (_name, _age) = (name, age);
+
+    private void Display() => Console.WriteLine($"{_name} -- {_age}");
+    
+    private string Describe() => $"My name is {_name} ,and I am {_age} years old";
+    
+    private void AddAge(int year) => _age += year;
 }
 
-// UnsafeAccessorSamples/Program.cs
-using System;
-using System.Runtime.CompilerServices;
+// 使用 UnsafeAccessor 建立存取器類別
+public static class PersonAccessor
+{
+    // 存取私有建構函式
+    [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
+    public extern static Person Create(string name, int age);
 
+    // 存取私有方法
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Display")]
+    public extern static void CallDisplay(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Describe")]
+    public extern static string CallDescribe(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "AddAge")]
+    public extern static void CallAddAge(Person person, int year);
+
+    // 存取私有欄位
+    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_name")]
+    public extern static ref string GetNameFiled(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_age")]
+    public extern static ref int GetAgeField(Person person);
+}
+
+// 使用範例
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        var someClassInstance = new SomeClass();
+        // 使用私有建構函式建立實例
+        var person = PersonAccessor.Create("Joe", 25);
         
-        // 存取私有欄位
-        var secretNumber = (int)UnsafeAccessor.Access(someClassInstance, "secretNumber");
-        Console.WriteLine($"Secret Number: {secretNumber}");
+        // 呼叫私有方法
+        PersonAccessor.CallDisplay(person);
         
-        // 存取私有静態欄位
-        var secretMessage = (string)UnsafeAccessor.Access(typeof(SomeClass), "secretMessage", true);
-        Console.WriteLine($"Secret Message: {secretMessage}");
+        // 存取並修改私有欄位
+        ref int age = ref PersonAccessor.GetAgeField(person);
+        age = 31;
+        PersonAccessor.CallDisplay(person);
         
-        // 調用私有方法
-        UnsafeAccessor.Invoke(someClassInstance, "RevealSecret");
+        ref string name = ref PersonAccessor.GetNameFiled(person);
+        name = "David";
+        PersonAccessor.CallDisplay(person);
+        
+        // 呼叫具有回傳值的私有方法
+        string description = PersonAccessor.CallDescribe(person);
+        Console.WriteLine(description);
+
+        // 呼叫具有參數的私有方法
+        PersonAccessor.CallAddAge(person, 10);
+        PersonAccessor.CallDisplay(person);
     }
 }
+```
+
+### 進階場景 - 泛型使用
+
+```csharp
+// 泛型 UnsafeAccessor 範例 (需要 .NET 9 或更高版本)
+var list = new List<int> { 1, 2, 3 };
+var accessor = list.UnsafeAccessor();
+
+// 存取 list 的私有欄位 "_items"
+var itemsField = accessor.Field<int[]>("_items");
+
+// 修改私有欄位
+itemsField[0] = 42;
 ```
 
 ## 🔗 參考資源
 
 - [Microsoft 官方文件 - UnsafeAccessor](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.unsafeaccessorattribute)
 - [.NET 9 Breaking Changes - UnsafeAccessor](https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/9.0/unsafeaccessor-generics)
-- [BenchmarkDotNet 官網](https://benchmarkdotnet.org/)
+- [BenchmarkDotNet 官網](https://benchmarkdotnet.org/
 
 ## 📄 授權條款
 

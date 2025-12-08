@@ -11,6 +11,7 @@ This project demonstrates how to use the `UnsafeAccessor` attribute in C# to acc
 - [Performance Comparison](#performance-comparison)
 - [Version Differences](#version-differences)
 - [Important Notes](#important-notes)
+- [Usage Examples](#usage-examples)
 - [References](#references)
 - [License](#license)
 
@@ -121,13 +122,77 @@ Based on BenchmarkDotNet test results (tested on Intel Core i7-1265U):
 ### Basic Syntax
 
 ```csharp
-// Example of using UnsafeAccessor to access private member
-var instance = new TargetClass();
-var accessor = instance.UnsafeAccessor();
+using System.Runtime.CompilerServices;
 
-accessor.Invoke("PrivateMethodName", param1, param2);
-var fieldValue = accessor.Field<int>("<FieldName>k__BackingField");
-accessor.FieldSet("<FieldName>k__BackingField", newValue);
+// Define a class with private members
+public class Person
+{
+    private string _name;
+    private int _age;
+
+    private Person(string name, int age) => (_name, _age) = (name, age);
+
+    private void Display() => Console.WriteLine($"{_name} -- {_age}");
+    
+    private string Describe() => $"My name is {_name} ,and I am {_age} years old";
+    
+    private void AddAge(int year) => _age += year;
+}
+
+// Create accessor class using UnsafeAccessor
+public static class PersonAccessor
+{
+    // Access private constructor
+    [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
+    public extern static Person Create(string name, int age);
+
+    // Access private methods
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Display")]
+    public extern static void CallDisplay(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Describe")]
+    public extern static string CallDescribe(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "AddAge")]
+    public extern static void CallAddAge(Person person, int year);
+
+    // Access private fields
+    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_name")]
+    public extern static ref string GetNameFiled(Person person);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_age")]
+    public extern static ref int GetAgeField(Person person);
+}
+
+// Usage example
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create instance using private constructor
+        var person = PersonAccessor.Create("Joe", 25);
+        
+        // Call private method
+        PersonAccessor.CallDisplay(person);
+        
+        // Access and modify private fields
+        ref int age = ref PersonAccessor.GetAgeField(person);
+        age = 31;
+        PersonAccessor.CallDisplay(person);
+        
+        ref string name = ref PersonAccessor.GetNameFiled(person);
+        name = "David";
+        PersonAccessor.CallDisplay(person);
+        
+        // Call private method with return value
+        string description = PersonAccessor.CallDescribe(person);
+        Console.WriteLine(description);
+
+        // Call private method with parameters
+        PersonAccessor.CallAddAge(person, 10);
+        PersonAccessor.CallDisplay(person);
+    }
+}
 ```
 
 ### Advanced Scenario - Generic Usage
