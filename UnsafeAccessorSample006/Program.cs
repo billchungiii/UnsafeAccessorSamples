@@ -37,9 +37,7 @@ namespace UnsafeAccessorSample006
         /// <returns></returns>
         [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
         [return: UnsafeAccessorType("UnsafeAccessorSample006.OuterClass+InnerClass,UnsafeAccessorSample006")]
-        public extern static object Create();
-
-       
+        public extern static object Create();       
 
         /// <summary>
         /// Accessing private nested class InnerClass's method ShowMessage 
