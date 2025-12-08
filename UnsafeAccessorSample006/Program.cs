@@ -9,15 +9,14 @@ namespace UnsafeAccessorSample006
     {
         static void Main(string[] args)
         {
-            ref var innerInstance = ref OuterClassAccessor.GetInnerInstance(new OuterClass());
-            OuterClassAccessor.CallShowMessage(innerInstance);
+            var innerInstance = OuterClassAccessor.Create();
+            OuterClassAccessor.CallShowMessage(innerInstance);           
         }
     }
 
 
     public class OuterClass
-    {
-        private object _innerInstance = new InnerClass();
+    {        
         /// <summary>
         /// this is an nested inner private class
         /// </summary>
@@ -33,12 +32,14 @@ namespace UnsafeAccessorSample006
     public static class OuterClassAccessor
     {
         /// <summary>
-        /// Accessing private field _innerInstance of OuterClass
+        /// Accessing private constructor of nested class InnerClass
         /// </summary>
-        /// <param name="outerInstance"></param>
         /// <returns></returns>
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_innerInstance")]
-        public extern static ref object GetInnerInstance(OuterClass outerInstance);
+        [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
+        [return: UnsafeAccessorType("UnsafeAccessorSample006.OuterClass+InnerClass")]
+        public extern static object Create();
+
+       
 
         /// <summary>
         /// Accessing private nested class InnerClass's method ShowMessage 
